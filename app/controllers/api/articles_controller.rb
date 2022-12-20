@@ -28,6 +28,15 @@ class Api:: ArticlesController < ApplicationController
   end
 
   def destroy
+    article= Article.find_by(id:params[:id])
+    if article
+      article.destroy
+      render json: "Article was deleted successfully"
+    else
+      render json: {
+        error: "Article Not Found"
+      }
+    end
   end
   def create
     article=Article.new(
